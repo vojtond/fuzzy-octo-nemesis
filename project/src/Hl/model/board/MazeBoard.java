@@ -5,6 +5,7 @@
  */
 package Hl.model.board;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +16,7 @@ import java.util.Observable;
  *
  * @author Pikachu
  */
-public class MazeBoard extends Observable{
+public class MazeBoard extends Observable implements Serializable{
   private MazeField[][] Maze; 
   public int rozmer;
   private  MazeCard volna;

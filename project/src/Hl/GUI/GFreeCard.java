@@ -20,11 +20,17 @@ import javax.swing.ImageIcon;
  * @author Pikachu
  */
 
-public class GFreeCard extends JLabel{   
+public final class GFreeCard extends JLabel{   
     private Pokus game;
     public  Point pozice;
     private boolean updatefree;
-    public GFreeCard(Pokus game){
+    private static GFreeCard GGfreeCard;
+    public static GFreeCard newGFreeCard(Pokus game){
+        GFreeCard.GGfreeCard=new GFreeCard( game);
+        return GGfreeCard;
+    
+    }
+    private GFreeCard(Pokus game){
         this.game=game;
         this.pozice=new Point(200,200);
         this.updatefree=true;

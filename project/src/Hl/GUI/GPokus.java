@@ -30,7 +30,7 @@ import javax.swing.JLayeredPane;
  *
  * @author Pikachu
  */
-public class GPokus extends JLayeredPane {
+public  class GPokus extends JLayeredPane {
     
     private Gboard Gdeska;
     private  GFreeCard Gfree;
@@ -46,8 +46,16 @@ public class GPokus extends JLayeredPane {
     public Rectangle2D.Double[][] rect2;
     private Dimension dim; 
     public Pokus game; 
-    
-    public GPokus(Pokus game){
+    public static GPokus GGPokus;
+    public static GPokus newGPokus(Pokus game){
+         System.out.print("***"+game.maze.get(2, 2).getCard().CardCanGo);
+         
+        GPokus.GGPokus=new GPokus(game);
+       
+        return GGPokus;
+        
+    }
+    private GPokus(Pokus game){
         double ratio,rH,rW;
         int gH,gW;
         this.game=game;
@@ -70,8 +78,8 @@ public class GPokus extends JLayeredPane {
         this.setFocusable(true);
         this.requestFocusInWindow();
         
-        this.Gdeska=new Gboard(game);
-        this.Gfree=new GFreeCard(game);
+        this.Gdeska=Gboard.newGboard(this.game);
+        this.Gfree=GFreeCard.newGFreeCard(this.game);
         this.Gfree.setOpaque(true);
         this.add(Gdeska,1,0);
         this.add(Gfree,2,0);
@@ -103,6 +111,7 @@ public class GPokus extends JLayeredPane {
             this.add(Gfigur,3,0);
             Gfigura.add(Gfigur);
           } 
+        repaint();
    }
   
   
@@ -113,6 +122,7 @@ public class GPokus extends JLayeredPane {
             this.setClick();
             isSetClick=true;
         }
+       
         for (GMazeFigur item : Gfigura) {
             item.setLocation(Gdeska.label[item.figur.x-1][item.figur.y-1].getX()+Gdeska.getX(),Gdeska.label[item.figur.x-1][item.figur.y-1].getY()+Gdeska.getY());
         }

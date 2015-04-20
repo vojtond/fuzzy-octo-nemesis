@@ -9,8 +9,9 @@ package Hl.model.board;
  *
  * @author Pikachu
  */
+import java.io.Serializable;
 import java.util.ArrayList;
-public class MazeCard {
+public class MazeCard implements Serializable {
     public ArrayList<CANGO> CardCanGo=new ArrayList<CANGO>();
     
     public static enum CANGO{

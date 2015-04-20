@@ -5,12 +5,14 @@
  */
 package Hl.model.board;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Pikachu
  */
 
-public class MazeField {
+public class MazeField implements Serializable{
     private int row;
     private int col;
     private MazeCard Rock;

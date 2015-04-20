@@ -4,11 +4,13 @@
  */
 package Hl.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author koci
  */
-public final class Position {
+public final class Position implements Serializable {
     
     private int x, y;
     

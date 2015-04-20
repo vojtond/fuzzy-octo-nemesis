@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/model/board/MazeCard.java</file>
             <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/GUI/GMazeFigur.java</file>
             <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/model/Pokus.java</file>
+            <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/model/Position.java</file>
+            <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/GUI/Gfield.java</file>
             <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/model/board/MazeBoard.java</file>
+            <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/model/board/MazeField.java</file>
             <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/Main.java</file>
             <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/model/board/MazeFigur.java</file>
+            <file>file:/C:/Users/Pikachu/Documents/NetBeansProjects/project/src/Hl/GameSave.java</file>
         </group>
     </open-files>
 </project-private>

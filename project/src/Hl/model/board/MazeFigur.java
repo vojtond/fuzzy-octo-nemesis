@@ -8,6 +8,7 @@ package Hl.model.board;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Serializable;
 import java.util.Observable;
 import javax.swing.JPanel;
 
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author Pikachu
  */
-public class MazeFigur  extends Observable {
+public class MazeFigur  extends Observable implements Serializable{
     public int x;
     public int y;
     private MazeBoard game;

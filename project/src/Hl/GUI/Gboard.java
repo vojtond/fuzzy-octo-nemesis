@@ -19,15 +19,24 @@ import java.util.Observer;
  *
  * @author Pikachu
  */
-public class Gboard extends JPanel{
+public  final class Gboard extends JPanel{
     public Gfield[][] label;
     private Dimension dimB; 
     private Pokus game;
     private JLabel figur;
     private  boolean updateimage;
-    public Gboard(Pokus game){
+    public static Gboard GGboard;
+    public static Gboard newGboard(Pokus game){
+        
+        GGboard=new Gboard(game);
+      
+        return GGboard;
+    }
+   private Gboard(Pokus game){
+       
         this.game=game;
         this.updateimage=true; 
+         
         label=new Gfield[game.maze.rozmer][game.maze.rozmer];
         GridLayout lay =new GridLayout(game.maze.rozmer,game.maze.rozmer);
         this.setLayout(lay);
@@ -35,29 +44,33 @@ public class Gboard extends JPanel{
         this.setPreferredSize(dimB);
         this.setSize(dimB);
         this.setBackground(Color.LIGHT_GRAY);
-     
+        //System.out.print("\n---"+this.game.maze.get(2, 2).getCard().CardCanGo+"\n");
         for(int i=0;i<game.maze.rozmer;i++){
-            for(int j=0;j<game.maze.rozmer;j++){           
+            for(int j=0;j<game.maze.rozmer;j++){   
                 label[i][j]=new Gfield(game, i, j);  
                 this.add(label[i][j]);
-                
+                 
             }
         }
-    
+      
+               
         this.setOpaque(true);
         this.game.maze.addObserver(new GSObserver());
-       
+       repaint();
     }
     @Override
     public void paintComponent(Graphics g){
 
-               
+         //  System.out.print("*na carte**"+GameAppFrame.game.maze.get(2, 2).getCard().CardCanGo+"\n");      
         super.paintComponent(g);
         if (updateimage){
+             
             this.updateimage=false;
+         
          for(int i=0;i<game.maze.rozmer;i++){
             for(int j=0;j<game.maze.rozmer;j++){
-               label[i][j].setMyImage();
+             
+               label[i][j].setMyImage(this.game.maze.get(i+1, j+1).getCard());
             }
          }
         }
@@ -67,10 +80,10 @@ public class Gboard extends JPanel{
        
        @Override 
        public void update(Observable o,Object arg){
-           System.out.print("\n*update*\n");
+           System.out.print("\n*updategg*\n");
            Gboard.this.updateimage=true;
 
-           repaint();
+           //repaint();
        }
    }
      

@@ -5,6 +5,7 @@
  */
 package Hl.model;
 import Hl.model.board.*;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Pikachu
  */
-public class Pokus {
+public final class Pokus implements Serializable {
     public int height;
     public int width;
     public MazeBoard maze;
@@ -21,7 +22,12 @@ public class Pokus {
      public int HracNaTahu;
       public List<MazeFigur> figura=new ArrayList<>();
       public MazeFigur figur;
-    public Pokus(){
+      public static Pokus PPokus;
+      public static Pokus NewPokus(){
+          PPokus=new Pokus();
+          return PPokus;
+      }
+    private Pokus(){
         maze=MazeBoard.createMazeBoard(11);
         maze.newGame();
         this.HracNaTahu=0;
@@ -32,7 +38,7 @@ public class Pokus {
         pocethrac=4;
         this.figur=figura.get(this.HracNaTahu);
         maze.figura=figura;
-        System.out.print(maze.get(2, 2).getCard().CardCanGo);
+       // System.out.print("***"+maze.get(2, 2).getCard().CardCanGo);
         height=800;
         width=800;
     }
@@ -43,6 +49,7 @@ public class Pokus {
         this.figur=figura.get(this.HracNaTahu);
         System.out.print(figur.y);
     }
+  
         
     
 }
