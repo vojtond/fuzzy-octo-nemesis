@@ -5,6 +5,7 @@
  */
 package Hl.model.board;
 
+import Hl.model.treasure.Treasure;
 import java.io.Serializable;
 
 /**
@@ -16,6 +17,7 @@ public class MazeField implements Serializable{
     private int row;
     private int col;
     private MazeCard Rock;
+   
     public int row(){
         return row;
     } 
@@ -25,6 +27,7 @@ public class MazeField implements Serializable{
     public MazeField(int row, int col){
         this.row=row;
         this.col=col;
+        
     }
     public void putCard(MazeCard c){
         Rock=c;
@@ -32,4 +35,5 @@ public class MazeField implements Serializable{
     public MazeCard getCard(){
         return Rock;
     }
+  
 }

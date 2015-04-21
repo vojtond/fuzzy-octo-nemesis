@@ -71,7 +71,7 @@ public class GameAppFrame {
             public void actionPerformed(ActionEvent e) {
           GameAppFrame.this.frame.setVisible(false);
                 try {
-                    GameAppFrame ff=new GameAppFrame(Pokus.NewPokus());
+                    GameAppFrame ff=new GameAppFrame(Pokus.NewPokus(4,7));
                 } catch (IOException ex) {
                     Logger.getLogger(GameAppFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }

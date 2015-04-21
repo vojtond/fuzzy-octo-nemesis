@@ -5,6 +5,7 @@
  */
 package Hl.model.board;
 
+import Hl.model.treasure.Treasure;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -20,12 +21,15 @@ public class MazeFigur  extends Observable implements Serializable{
     public int x;
     public int y;
     private MazeBoard game;
+    public Treasure treasure;
     public MazeFigur(int x,int y,MazeBoard maze){
        this.x=x;
        this.y=y;
        this.game=maze;
-       
-       
+      // this.treasure=new Treasure(5);
+       System.out.print("tu\n");
+       this.treasure=null;
+       System.out.print("tam\n"); 
    
     }
   public void changeShift(int x,int y){
@@ -46,36 +50,43 @@ public class MazeFigur  extends Observable implements Serializable{
       System.out.print("\n**"+this.x+" "+this.y+"**\n");
       
   }
-  public void move(MazeCard.CANGO can){
+  public  boolean move(MazeCard.CANGO can){
       System.out.print("asdasd\n");
+      boolean move;
+      move= false;
      if (game.get(x, y).getCard().canGo(can)){
           System.out.print("asdasd\n");
          if (can==MazeCard.CANGO.UP){
              
              if ( x-1>0 && game.get(x-1, y).getCard().canGo(MazeCard.CANGO.DOWN)){
                 x+=-1;
+                move= true;
              }
          }else
          if (can==MazeCard.CANGO.DOWN){
                if ( x+1<=game.rozmer && game.get(x+1, y).getCard().canGo(MazeCard.CANGO.UP)){
              x+=1;
+             move= true;
                }
          }else
          if (can==MazeCard.CANGO.LEFT){
                if (y-1>0 && game.get(x, y-1).getCard().canGo(MazeCard.CANGO.RIGHT)){
                 y+=-1;
+                move= true;
                }
          }else
          if (can==MazeCard.CANGO.RIGHT){
                if (y+1<=game.rozmer &&game.get(x, y+1).getCard().canGo(MazeCard.CANGO.LEFT)){
              
                 y+=1;
+                move= true;
                }
          }
-     }
+     } 
         setChanged();
        notifyObservers();
-     System.out.print("\n**"+x+" "+y+"**\n");
+     
+     return move;
   }
    
 }

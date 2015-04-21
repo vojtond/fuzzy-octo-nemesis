@@ -9,21 +9,24 @@ package Hl.model.board;
  *
  * @author Pikachu
  */
+import Hl.model.treasure.Treasure;
 import java.io.Serializable;
 import java.util.ArrayList;
 public class MazeCard implements Serializable {
     public ArrayList<CANGO> CardCanGo=new ArrayList<CANGO>();
-    
+     public Treasure poklad;
     public static enum CANGO{
         LEFT,UP,RIGHT,DOWN;
     }
     public static MazeCard create (String type){
         MazeCard nova=new MazeCard(type);
-     
+        
         return nova;
         
     }
     private MazeCard(String type){
+        this.poklad=null;
+       
         switch (type) {
             case "C":
                 this.CardCanGo.add(CANGO.LEFT); 
@@ -66,6 +69,12 @@ public class MazeCard implements Serializable {
           PomCardCanGo.add(CANGO.UP);
       }
       CardCanGo=PomCardCanGo;
+    }
+      public void putTreasure(Treasure poklad){
+        this.poklad=poklad;
+    }
+    public Treasure getTreasure(){
+        return this.poklad;
     }
    
 }

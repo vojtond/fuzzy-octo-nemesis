@@ -116,10 +116,10 @@ public class MazeBoard extends Observable implements Serializable{
           return volna;    
   }
   public void shift (MazeField mf){
-      System.out.print("\n*shoft*\n");
+    
       setChanged();
        notifyObservers();
-       System.out.print("notifz\n");
+     
       MazeCard pom=volna;
       if (mf.row()==1 &&( mf.col()%2==0)){
           pom=Maze[rozmer][mf.col()].getCard();
