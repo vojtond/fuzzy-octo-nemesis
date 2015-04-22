@@ -26,10 +26,7 @@ public class MazeFigur  extends Observable implements Serializable{
        this.x=x;
        this.y=y;
        this.game=maze;
-      // this.treasure=new Treasure(5);
-       System.out.print("tu\n");
        this.treasure=null;
-       System.out.print("tam\n"); 
    
     }
   public void changeShift(int x,int y){

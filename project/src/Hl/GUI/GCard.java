@@ -8,11 +8,15 @@ package Hl.GUI;
 import javax.swing.JLabel;
 
 import Hl.model.Pokus;
+import Hl.model.board.MazeBoard;
 
 import Hl.model.board.MazeCard;
+import Hl.model.board.MazeField;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.Serializable;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
@@ -29,7 +33,7 @@ public class GCard extends JLayeredPane implements Serializable{
     private JLabel obr;
     private JLabel treasure;
         private Dimension dim; 
-    public GCard(MazeCard card){
+    public GCard(Pokus game,MazeCard card,int i,int j){
           double ratio,rH,rW;
         int gH,gW;
          int height=40;
@@ -48,8 +52,12 @@ public class GCard extends JLayeredPane implements Serializable{
         this.setLayout(null);
 
         this.card=card;
+        if (i>0 && j>0){
+            System.out.print(i+" "+j+"tu\n");
+        game.maze.get(i, j).addObserver(new GCard.GSObserver());
         
-       this.icon=setMyImage(this.card);
+        }
+        this.icon=setMyImage(this.card);
         this.treasure=new JLabel();
       this.setLayout(null);
       if (card.poklad!=null){
@@ -160,6 +168,16 @@ public class GCard extends JLayeredPane implements Serializable{
   
               }
   
-  
+    private class GSObserver implements Observer{
+       
+       @Override 
+       public void update(Observable o,Object arg){
+           MazeField argu=(MazeField)arg;
+           System.out.print("tady\n"+argu.row()+argu.col());
+           GCard.this.setImage(argu.getCard());
+
+           //repaint();
+       }
+   }
     
 }

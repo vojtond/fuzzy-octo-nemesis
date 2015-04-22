@@ -117,8 +117,7 @@ public class MazeBoard extends Observable implements Serializable{
   }
   public void shift (MazeField mf){
     
-      setChanged();
-       notifyObservers();
+
      
       MazeCard pom=volna;
       if (mf.row()==1 &&( mf.col()%2==0)){
@@ -178,6 +177,7 @@ public class MazeBoard extends Observable implements Serializable{
         
        }
       
-     
+           setChanged();
+       notifyObservers(this.volna);
   }
 }

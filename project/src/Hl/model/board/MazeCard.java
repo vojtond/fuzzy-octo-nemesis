@@ -12,7 +12,8 @@ package Hl.model.board;
 import Hl.model.treasure.Treasure;
 import java.io.Serializable;
 import java.util.ArrayList;
-public class MazeCard implements Serializable {
+import java.util.Observable;
+public class MazeCard extends Observable implements Serializable {
     public ArrayList<CANGO> CardCanGo=new ArrayList<CANGO>();
      public Treasure poklad;
     public static enum CANGO{
@@ -20,7 +21,7 @@ public class MazeCard implements Serializable {
     }
     public static MazeCard create (String type){
         MazeCard nova=new MazeCard(type);
-        
+              
         return nova;
         
     }
@@ -51,6 +52,7 @@ public class MazeCard implements Serializable {
         return CardCanGo.contains(dir);
     }
     public void turnRight(){
+         
       ArrayList<CANGO> PomCardCanGo=new ArrayList<CANGO>();
       if (  CardCanGo.contains(CANGO.UP)){
           CardCanGo.remove(CANGO.UP);
@@ -69,6 +71,8 @@ public class MazeCard implements Serializable {
           PomCardCanGo.add(CANGO.UP);
       }
       CardCanGo=PomCardCanGo;
+      setChanged();
+       notifyObservers(this);
     }
       public void putTreasure(Treasure poklad){
         this.poklad=poklad;

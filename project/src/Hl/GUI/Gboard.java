@@ -48,7 +48,8 @@ public  final class Gboard extends JPanel{
         this.setBackground(Color.LIGHT_GRAY);
         for(int i=0;i<game.maze.rozmer;i++){
             for(int j=0;j<game.maze.rozmer;j++){   
-                label[i][j]=new GCard(game.maze.get(i+1, j+1).getCard());  
+                label[i][j]=new GCard(game,game.maze.get(i+1, j+1).getCard(),i+1,j+1);  
+                
                 this.add(label[i][j]);
                  
             }
@@ -56,7 +57,7 @@ public  final class Gboard extends JPanel{
       
                
         this.setOpaque(true);
-        game.maze.addObserver(new GSObserver());
+     
        repaint();
     }
     @Override
@@ -64,18 +65,7 @@ public  final class Gboard extends JPanel{
 
          //  System.out.print("*na carte**"+GameAppFrame.game.maze.get(2, 2).getCard().CardCanGo+"\n");      
         super.paintComponent(g);
-        if (updateimage){
-             
-            this.updateimage=false;
-         
-        for(int i=0;i<maze.rozmer;i++){
-            for(int j=0;j<maze.rozmer;j++){
-                
-                label[i][j].setImage(maze.get(i+1, j+1).getCard());
-             
-            }
-         }
-        }
+     
 
     }
     public MazeBoard getBoard(){
@@ -84,16 +74,7 @@ public  final class Gboard extends JPanel{
     public  GCard getField(int i,int j){
         return label[i][j];
     }
-     private class GSObserver implements Observer{
-       
-       @Override 
-       public void update(Observable o,Object arg){
-         
-           Gboard.this.updateimage=true;
-
-           //repaint();
-       }
-   }
+    
      
   
     

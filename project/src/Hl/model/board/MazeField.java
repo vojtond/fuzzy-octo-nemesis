@@ -7,13 +7,14 @@ package Hl.model.board;
 
 import Hl.model.treasure.Treasure;
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  *
  * @author Pikachu
  */
 
-public class MazeField implements Serializable{
+public class MazeField extends Observable implements  Serializable{
     private int row;
     private int col;
     private MazeCard Rock;
@@ -30,7 +31,10 @@ public class MazeField implements Serializable{
         
     }
     public void putCard(MazeCard c){
+       
         Rock=c;
+           setChanged();
+       notifyObservers(this);
     }
     public MazeCard getCard(){
         return Rock;
