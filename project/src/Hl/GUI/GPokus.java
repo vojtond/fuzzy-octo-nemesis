@@ -48,6 +48,8 @@ public  class GPokus extends JLayeredPane {
     private Dimension dim; 
     private Pokus game; 
     private static GPokus GGPokus;
+    public GTreasureCard Gtreasurecard;
+    
     public static GPokus newGPokus(Pokus game){
          System.out.print("***"+game.maze.get(2, 2).getCard().CardCanGo);
          
@@ -90,6 +92,23 @@ public  class GPokus extends JLayeredPane {
         this.Freepoc.setLocation(Gdeska.getX()-60, Gdeska.getY()-60);
         this.Gfree.pozice=this.Freepoc;
         
+        this.Gtreasurecard=new GTreasureCard(game);
+        
+        this.add(Gtreasurecard,1,0);
+        height=40;
+        width=40;
+        rH=(double)40/height;
+        rW=(double)40/width;
+        ratio=rH>1 ? 1:rH;
+        ratio=rW>1 ? ratio : ( rW > rH ? rH : rW);
+        gH=(int)(height*ratio);
+        gW=(int)(width*ratio);
+        dim=new Dimension (gH,gW);
+        this.Gtreasurecard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.Gtreasurecard.setPreferredSize(dim);
+        this.Gtreasurecard.setSize(dim);
+        this.Gtreasurecard.setBackground(Color.BLACK);
+        this.Gtreasurecard.setLocation(0,0);
         
         this.rectout=new Rectangle2D.Double();
         rect2=new Rectangle2D.Double[game.maze.rozmer][game.maze.rozmer];

@@ -11,12 +11,13 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Random;
 /**
  *
  * @author Pikachu
  */
-public final class Pokus implements Serializable {
+public final class Pokus extends Observable implements Serializable {
     public int height;
     public int width;
     public MazeBoard maze;
@@ -102,6 +103,8 @@ public CardPack pack;
                         figur.treasure=pack.popCard().TreasureOnCard;
                       
           }
+            setChanged();
+            notifyObservers(this.figur.treasure);
             System.out.print("hledam"+figur.treasure.code+"\n");
     }
   
