@@ -5,11 +5,10 @@
  */
 package Hl.GUI;
 import Hl.GUI.Gboard;
-import javax.swing.JPanel;
+
 import Hl.model.Pokus;
 import Hl.model.board.MazeCard;
 import Hl.model.board.MazeFigur;
-import Hl.model.treasure.Treasure;
 
 import java.awt.Color;
 import javax.swing.BorderFactory;
@@ -23,10 +22,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
-import javax.swing.JLabel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.JLayeredPane;
 /**
  *
@@ -98,15 +95,12 @@ public  class GPokus extends JLayeredPane {
                rect2[i][j]=new Rectangle2D.Double();        
             }
         }
-       
-      
-      
+  
         this.addKeyListener(new figurKeyEvent());
         MListener ml=new MListener();
         this.addMouseListener(ml);
         this.addMouseMotionListener(ml);
-        
-        
+
         for (MazeFigur item : game.figura) {     
             Gfigur=new GMazeFigur(game, item);
             this.add(Gfigur,3,0);
@@ -148,7 +142,8 @@ public  class GPokus extends JLayeredPane {
     private class MListener extends MouseAdapter{
         @Override
         public void mousePressed(MouseEvent e){
-           if (Gfree.contains(e.getX()-Gfree.getX(), e.getY()-Gfree.getY())){
+            
+           if (Gfree.contains(e.getX()-Gfree.getX(), e.getY()-Gfree.getY())&& game.faze==0){
                if (e.getButton()==MouseEvent.BUTTON3){
                    Gdeska.getBoard().getFreeCard().turnRight();
                    repaint();
@@ -182,8 +177,6 @@ public  class GPokus extends JLayeredPane {
                                
                             }
                             if (rect2[j-1][i-1].contains(Gfree.pozice)){
-                               
-                                //game.maze.shift(game.maze.get(j, i));
                                 game.faze=1;
                                 Gdeska.getBoard().shift(Gdeska.getBoard().get(j, i));
                                 if(i==1){
@@ -226,24 +219,18 @@ public  class GPokus extends JLayeredPane {
         public void keyPressed(KeyEvent e){
      
             switch (e.getKeyCode()){
-                case 10:
-                    
+                case 10:                   
                     game.changePlayer();
-                  
                 break;
                 case 37:
                      
                     if (game.figur.move(MazeCard.CANGO.LEFT)){
                        game.faze=2; 
-                         if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
-                        game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;
-                       
-                        Gdeska.updateimage=true;
-                        Gdeska.repaint();
-                       
-                        game.figur.treasure=null;
-                         game.changePlayer();
-                    }
+                       if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
+                            game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;
+                            game.figur.treasure=null;
+                            game.changePlayer();
+                        }
                     }
                   
                 break;
@@ -251,14 +238,11 @@ public  class GPokus extends JLayeredPane {
                      
                     if (game.figur.move(MazeCard.CANGO.UP)){
                         game.faze=2;
-                             if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
-                        game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;
-                       Gdeska.updateimage=true;
-                        Gdeska.repaint();
-                        
-                        game.figur.treasure=null;
-                         game.changePlayer();
-                     }
+                        if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
+                            game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;
+                            game.figur.treasure=null;
+                            game.changePlayer();
+                        }
                     }
                 
                 break;
@@ -266,15 +250,11 @@ public  class GPokus extends JLayeredPane {
                     
                     if (game.figur.move(MazeCard.CANGO.RIGHT)){
                         game.faze=2;
-                           if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
-                        game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;
-                        Gdeska.updateimage=true;
-                        Gdeska.repaint();
-                         
-                        game.figur.treasure=null;
-                         game.changePlayer();
-                    
-                     }
+                        if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
+                            game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;
+                            game.figur.treasure=null;
+                            game.changePlayer();
+                        }
                     }
                   
                 break;
@@ -282,15 +262,12 @@ public  class GPokus extends JLayeredPane {
                     
                     if (game.figur.move(MazeCard.CANGO.DOWN)){
                         game.faze=2;
-                              if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
-                        game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;
-                        Gdeska.updateimage=true;
-                        Gdeska.repaint();
-                         
-                        game.figur.treasure=null;
-                         game.changePlayer();
+                        if (game.figur.treasure.equals(game.maze.get(game.figur.x,game.figur.y).getCard().poklad)){
+                            game.maze.get(game.figur.x,game.figur.y).getCard().poklad=null;  
+                            game.figur.treasure=null;
+                            game.changePlayer();
                      
-                     }
+                        }
                     }
                
                 break;

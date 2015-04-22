@@ -23,7 +23,6 @@ import java.util.Observer;
 public  final class Gboard extends JPanel{
     private GCard[][] label;
     private Dimension dimB; 
-  
     public MazeBoard maze;
     private JLabel figur;
     public  boolean updateimage;
@@ -60,14 +59,8 @@ public  final class Gboard extends JPanel{
      
        repaint();
     }
-    @Override
-    public void paintComponent(Graphics g){
-
-         //  System.out.print("*na carte**"+GameAppFrame.game.maze.get(2, 2).getCard().CardCanGo+"\n");      
-        super.paintComponent(g);
-     
-
-    }
+   
+   
     public MazeBoard getBoard(){
         return this.maze;
     }
