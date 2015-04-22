@@ -58,17 +58,25 @@ public class MazeBoard extends Observable implements Serializable{
             if ((i==1 && j==1) || (i==1 && j==rozmer) || (i==rozmer && j==1) || (i==rozmer && j==rozmer)){
                   Maze[i][j].putCard(MazeCard.create("C"));
                   if(i==1 && j==1){
+                      Maze[i][j].getCard().position=1;
                       rotate(Maze[i][j].getCard(),2);
          
                   }else
                   if(i==1 && j==rozmer){
+                       Maze[i][j].getCard().position=2;
                       rotate(Maze[i][j].getCard(),3);
                      
                   }else
                   if(i==rozmer && j==1){
+                       Maze[i][j].getCard().position=3;
                       rotate(Maze[i][j].getCard(),1);
                         
-                  }
+                  }else
+                   if(i==rozmer && j==rozmer){
+                       Maze[i][j].getCard().position=4;
+                    
+                        
+                  }   
               }else
               if(i %2==1 && j%2==1){
                 Maze[i][j].putCard(MazeCard.create("F"));

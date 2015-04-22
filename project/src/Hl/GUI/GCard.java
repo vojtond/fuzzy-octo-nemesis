@@ -8,16 +8,12 @@ package Hl.GUI;
 import javax.swing.JLabel;
 
 import Hl.model.Pokus;
-import Hl.model.board.MazeBoard;
-
 import Hl.model.board.MazeCard;
 import Hl.model.board.MazeField;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 
@@ -30,69 +26,115 @@ public class GCard extends JLayeredPane implements Serializable{
    
     private MazeCard card;
     private ImageIcon icon;
-    private JLabel obr;
-    private JLabel treasure;
-        private Dimension dim; 
+    private JLabel Gcard;
+    private JLabel Gtreasure;
+    private Dimension dim; 
     public GCard(Pokus game,MazeCard card,int i,int j){
           double ratio,rH,rW;
         int gH,gW;
-         int height=40;
-        int width=40;
-        rH=(double)40/40;
-        rW=(double)40/40;
+         int height=60;
+        int width=60;
+        rH=(double)60/60;
+        rW=(double)60/60;
         ratio=rH>1 ? 1:rH;
         ratio=rW>1 ? ratio : ( rW > rH ? rH : rW);
         gH=(int)(height*ratio);
         gW=(int)(width*ratio);
         dim=new Dimension (gH,gW);
-
         this.setPreferredSize(dim);
         this.setSize(dim);
         this.setOpaque(true);
         this.setLayout(null);
-
         this.card=card;
         if (i>0 && j>0){
-            System.out.print(i+" "+j+"tu\n");
-        game.maze.get(i, j).addObserver(new GCard.GSObserver());
+          
+            game.getBoard().get(i, j).addObserver(new GCard.GSObserver());
         
         }
         this.icon=setMyImage(this.card);
-        this.treasure=new JLabel();
+        this.Gtreasure=new JLabel();
       this.setLayout(null);
       if (card.poklad!=null){
-
-      
-        this.treasure.setText(""+card.poklad.code);
-        this.treasure.setSize(20, 20);
-        
          
+        this.Gtreasure.setText(""+card.poklad.code);
+        this.Gtreasure.setSize(60, 60);
+       this.Gtreasure.setIcon(GCard.setTreasureImage(card.poklad.code));
+                
       }
-  this.add(treasure,2,0);
-    
-      
-       this.obr=new JLabel();
-   
-      obr.setIcon(icon);
-      obr.setIconTextGap(0);
-      obr.setSize(40,40);
-      this.add(obr,1,0);
+  this.add(Gtreasure,2,0);
+ 
+       this.Gcard=new JLabel();
+     
+      Gcard.setIcon(icon);
+      Gcard.setIconTextGap(0);
+      Gcard.setSize(60,60);
+      this.add(Gcard,1,0);
  
       
     }
+    public static  ImageIcon setTreasureImage(int code){
+        ImageIcon icon=new ImageIcon("");
+        switch(code){
+               case 1:
+
+                  icon=new ImageIcon("1.png");    
+               break;
+               case 2:
+
+                  icon=new ImageIcon("2.png");    
+               break;
+               case 3:
+
+                  icon=new ImageIcon("3.png");    
+               break;
+               case 4:
+
+                  icon=new ImageIcon("4.png");    
+               break;
+               case 5:
+
+                  icon=new ImageIcon("5.png");    
+               break;
+               case 6:
+
+                  icon=new ImageIcon("6.png");    
+               break;
+               case 7:
+
+                  icon=new ImageIcon("7.png");    
+               break;
+           }
+        return icon;
+    }
    public  void setImage(MazeCard card){
        if (card.poklad!=null){
-         this.treasure.setText(""+card.poklad.code);
-         this.treasure.setSize(20, 20);
-       }else  this.treasure.setText("");
+            this.Gtreasure.setSize(60, 60);
+            this.Gtreasure.setIcon(GCard.setTreasureImage(card.poklad.code));
+           this.Gtreasure.setText(""+card.poklad.code);
+           
+         
+        
+       }else  {this.Gtreasure.setIcon(null);this.Gtreasure.setText("");}
        this.card=card;
        this.icon=GCard.setMyImage(card);
-       this.obr.setIcon(icon); 
+       this.Gcard.setIcon(icon); 
+       repaint();
    }
    public static ImageIcon setMyImage(MazeCard card){
       
        ImageIcon icon=new ImageIcon("");
-      
+      if (card.position==1){
+          icon=new ImageIcon("LN.png");
+      }else
+      if (card.position==2){
+          icon=new ImageIcon("PN.png");
+      }else
+      if (card.position==3){
+          icon=new ImageIcon("LD.png");
+      }else
+       if (card.position==4){
+          icon=new ImageIcon("PD.png");
+      }else{
         if (card.canGo(MazeCard.CANGO.LEFT)){
           if (card.canGo(MazeCard.CANGO.RIGHT)){
               icon=new ImageIcon("LR.png");
@@ -163,6 +205,7 @@ public class GCard extends JLayeredPane implements Serializable{
              
           }
       }
+       }
       return icon;
      
   
@@ -172,12 +215,14 @@ public class GCard extends JLayeredPane implements Serializable{
        
        @Override 
        public void update(Observable o,Object arg){
+           
            MazeField argu=(MazeField)arg;
-           System.out.print("tady\n"+argu.row()+argu.col());
+          // System.out.print("tady\n"+argu.row()+argu.col());
            GCard.this.setImage(argu.getCard());
 
-           //repaint();
+           //
        }
    }
+  
     
 }

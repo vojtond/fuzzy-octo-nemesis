@@ -38,13 +38,13 @@ public final class GFreeCard extends JPanel{
     
     }
     private GFreeCard(Pokus game){
-        this.setSize(40,41);
+        this.setSize(60,61);
         this.pozice=new Point(200,200);
         this.updatefree=true;
-        this.FreeCard=game.maze.getFreeCard();
+        this.FreeCard=game.getBoard().getFreeCard();
         obs=new GSObserver();
-        game.maze.addObserver(obs);
-        game.maze.getFreeCard().addObserver(obs);
+        game.getBoard().addObserver(obs);
+        game.getBoard().getFreeCard().addObserver(obs);
         this.setLayout(null);
         
         this.Gfreecard=new GCard(null,FreeCard,0,0);

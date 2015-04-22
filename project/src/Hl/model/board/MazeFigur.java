@@ -48,11 +48,11 @@ public class MazeFigur  extends Observable implements Serializable{
       
   }
   public  boolean move(MazeCard.CANGO can){
-      System.out.print("asdasd\n");
+     
       boolean move;
       move= false;
      if (game.get(x, y).getCard().canGo(can)){
-          System.out.print("asdasd\n");
+       
          if (can==MazeCard.CANGO.UP){
              
              if ( x-1>0 && game.get(x-1, y).getCard().canGo(MazeCard.CANGO.DOWN)){
@@ -82,7 +82,7 @@ public class MazeFigur  extends Observable implements Serializable{
      } 
         setChanged();
        notifyObservers();
-     
+      System.out.print("\n**"+this.x+" "+this.y+"**\n");
      return move;
   }
    

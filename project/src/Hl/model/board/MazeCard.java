@@ -16,9 +16,11 @@ import java.util.Observable;
 public class MazeCard extends Observable implements Serializable {
     public ArrayList<CANGO> CardCanGo=new ArrayList<CANGO>();
      public Treasure poklad;
+     public int position;
     public static enum CANGO{
         LEFT,UP,RIGHT,DOWN;
     }
+
     public static MazeCard create (String type){
         MazeCard nova=new MazeCard(type);
               
@@ -27,8 +29,10 @@ public class MazeCard extends Observable implements Serializable {
     }
     private MazeCard(String type){
         this.poklad=null;
-       
+       this.position=0;
         switch (type) {
+         
+             
             case "C":
                 this.CardCanGo.add(CANGO.LEFT); 
                 this.CardCanGo.add(CANGO.UP); 
@@ -76,9 +80,10 @@ public class MazeCard extends Observable implements Serializable {
     }
       public void putTreasure(Treasure poklad){
         this.poklad=poklad;
+  
     }
     public Treasure getTreasure(){
         return this.poklad;
     }
-   
+
 }

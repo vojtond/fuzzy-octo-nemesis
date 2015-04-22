@@ -18,10 +18,25 @@ import java.util.Random;
  * @author Pikachu
  */
 public final class Pokus extends Observable implements Serializable {
-    public int height;
-    public int width;
-    public MazeBoard maze;
-    public int faze;
+    private int height;
+    private int width;
+    private MazeBoard maze;
+    private int faze;
+public void setFaze(int faze){
+    this.faze=faze;
+}
+public int getFaze(){
+    return this.faze;
+}
+public int getHeight(){
+    return this.height;
+}
+public int getWidth(){
+    return this.width;
+}
+public MazeBoard getBoard(){
+    return this.maze;
+}
 public CardPack pack;
      public int pocethrac;
      public int HracNaTahu;
@@ -106,6 +121,7 @@ public CardPack pack;
             setChanged();
             notifyObservers(this.figur.treasure);
             System.out.print("hledam"+figur.treasure.code+"\n");
+            
     }
   
         

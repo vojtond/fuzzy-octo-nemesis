@@ -12,9 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import Hl.GUI.GCard;
 import Hl.model.board.MazeBoard;
-import java.awt.Graphics;
-import java.util.Observable;
-import java.util.Observer;
+
 
 /**
  *
@@ -23,12 +21,10 @@ import java.util.Observer;
 public  final class Gboard extends JPanel{
     private GCard[][] label;
     private Dimension dimB; 
-    public MazeBoard maze;
+    private MazeBoard maze;
     private JLabel figur;
-    public  boolean updateimage;
     private static Gboard GGboard;
-    public static Gboard newGboard(Pokus game){
-        
+    public static Gboard newGboard(Pokus game){  
         GGboard=new Gboard(game);
       
         return GGboard;
@@ -36,39 +32,31 @@ public  final class Gboard extends JPanel{
    private Gboard(Pokus game){
        
     
-        this.maze=game.maze;
-        this.updateimage=true;     
-        label=new GCard[game.maze.rozmer][game.maze.rozmer];
-        GridLayout lay =new GridLayout(game.maze.rozmer,game.maze.rozmer);
+        this.maze=game.getBoard();
+            
+        label=new GCard[game.getBoard().rozmer][game.getBoard().rozmer];
+        GridLayout lay =new GridLayout(game.getBoard().rozmer,game.getBoard().rozmer);
         this.setLayout(lay);
-        dimB=new Dimension (game.maze.rozmer*40,40*game.maze.rozmer);
+        dimB=new Dimension (game.getBoard().rozmer*60,60*game.getBoard().rozmer);
         this.setPreferredSize(dimB);
         this.setSize(dimB);
         this.setBackground(Color.LIGHT_GRAY);
-        for(int i=0;i<game.maze.rozmer;i++){
-            for(int j=0;j<game.maze.rozmer;j++){   
-                label[i][j]=new GCard(game,game.maze.get(i+1, j+1).getCard(),i+1,j+1);  
+        for(int i=0;i<game.getBoard().rozmer;i++){
+            for(int j=0;j<game.getBoard().rozmer;j++){   
+                label[i][j]=new GCard(game,game.getBoard().get(i+1, j+1).getCard(),i+1,j+1);  
                 
                 this.add(label[i][j]);
                  
             }
         }
-      
-               
+
         this.setOpaque(true);
-     
        repaint();
     }
-   
-   
     public MazeBoard getBoard(){
         return this.maze;
     }
     public  GCard getField(int i,int j){
         return label[i][j];
-    }
-    
-     
-  
-    
+    } 
 }
