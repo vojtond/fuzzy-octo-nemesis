@@ -22,10 +22,10 @@ public class GTreasureCard extends JPanel{
     public JLabel GTreasure;
     public GTreasureCard(Pokus game){
         GTreasure=new JLabel();
-         GTreasure.setIcon(GCard.setTreasureImage(game.figur.treasure.code));
+         GTreasure.setIcon(GCard.setTreasureImage(game.figur.treasure.Gcode));
          GTreasure.setSize(60, 60);
         this.add(GTreasure,BorderLayout.CENTER);
-        GTreasure.setText(""+game.figur.treasure.code);
+       
         game.addObserver(new GTreasureCard.GSObserver());
        
     
@@ -37,7 +37,7 @@ public class GTreasureCard extends JPanel{
        public void update(Observable o,Object arg){
            Treasure argu=(Treasure)arg;
            GTreasureCard.this.GTreasure.setText(""+argu.code);
-              GTreasureCard.this.GTreasure.setIcon(GCard.setTreasureImage(argu.code));
+              GTreasureCard.this.GTreasure.setIcon(GCard.setTreasureImage(argu.Gcode));
            
           
 

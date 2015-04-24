@@ -39,7 +39,6 @@ public  class GPokus extends JLayeredPane {
     private final int maxHeight=1500;
     private final int maxWidth=1500;
     private GMazeFigur Gfigur; 
-    private Rectangle2D.Double rectout;
     private List<GMazeFigur> Gfigura=new ArrayList<>();
     private Rectangle2D.Double[][] rect2;
     private Dimension dim; 
@@ -104,8 +103,6 @@ public  class GPokus extends JLayeredPane {
         this.Gtreasurecard.setSize(dim);
         this.Gtreasurecard.setBackground(Color.BLACK);
         this.Gtreasurecard.setLocation(0,0);
-        
-        this.rectout=new Rectangle2D.Double();
         rect2=new Rectangle2D.Double[game.getBoard().rozmer][game.getBoard().rozmer];
         for(int i=0;i<game.getBoard().rozmer;i++){
             for(int j=0;j<game.getBoard().rozmer;j++){
@@ -137,15 +134,7 @@ public  class GPokus extends JLayeredPane {
        
         for (GMazeFigur item : Gfigura) {
             item.setLocation(Gdeska.getField(item.figur.x-1, item.figur.y-1).getX()+Gdeska.getX()+10,Gdeska.getField(item.figur.x-1, item.figur.y-1).getY()+Gdeska.getY()+10);
-        }
-        Graphics2D g2=(Graphics2D) g;
-        Color oldC=g2.getColor();
-        rectout.setRect(Gdeska.getX()-80, Gdeska.getY()-80,Gdeska.getHeight()+160, Gdeska.getWidth()+160);
-        g2.setColor(Color.BLACK);
-        g2.draw(rectout);
-   
-              
-         
+        }           
     }
 
     
@@ -216,15 +205,10 @@ public  class GPokus extends JLayeredPane {
          @Override
         public void mouseDragged(MouseEvent e){
             if(isFocus && game.getFaze()==0){ 
-                if (rectout.contains(Gfree.pozice)){
+               
                   Gfree.pozice=e.getPoint();
                   repaint();
-                }else{
-                    e.consume();
-                    isFocus=false;
-                    Gfree.pozice=Freepoc;
-                    repaint();
-                }
+               
             }
           
         }

@@ -22,12 +22,13 @@ public class MazeFigur  extends Observable implements Serializable{
     public int y;
     private MazeBoard game;
     public Treasure treasure;
-    public MazeFigur(int x,int y,MazeBoard maze){
+    public int player;
+    public MazeFigur(int x,int y,MazeBoard maze,int player){
        this.x=x;
        this.y=y;
        this.game=maze;
        this.treasure=null;
-   
+       this.player=player;
     }
   public void changeShift(int x,int y){
       this.x=this.x+x;

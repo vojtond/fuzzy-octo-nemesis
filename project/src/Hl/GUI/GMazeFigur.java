@@ -27,7 +27,8 @@ public class GMazeFigur extends JLabel {
         this.figur=figur;
         this.figur.addObserver(new GMazeFigur.GSObserver());
         ImageIcon icon=new ImageIcon("");
-        icon=new ImageIcon("figur.png");
+        
+        icon=new ImageIcon("figur"+figur.player+".png");
        
         setIcon(icon);
         setIconTextGap(0);

@@ -16,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import Hl.Main;
+import java.awt.event.KeyEvent;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,6 +26,10 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -63,13 +68,35 @@ public class GameAppFrame {
          menuBar = new JMenuBar();
         menu = new JMenu("File");
         menuBar.add(menu);
+        JMenu submenu;
+        submenu = new JMenu("New Game");
+        submenu.setMnemonic(KeyEvent.VK_S);
         
-        menuItem = new JMenuItem("New Game");
-      
-        menuItem.addActionListener(new ActionListener() {
+        ButtonGroup group=new ButtonGroup();
+        menuItem=new Gradiomenu("velikost 5");
+        //menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        //menuItem.setMnemonic(KeyEvent.VK_R);
+        group.add(menuItem);
+        submenu.add(menuItem);
+        JRadioButton radiobutton=new JRadioButton("velikost 7");
+        radiobutton.setSelected(true);
+        
+        //menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        group.add(radiobutton);
+        submenu.add(radiobutton);
+        menuItem=new Gradiomenu("velikost 9");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        group.add(menuItem);
+        submenu.add(menuItem);
+        menuItem=new Gradiomenu("velikost 11");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        group.add(menuItem);
+        submenu.add(menuItem);
+       
+        /*submenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-          GameAppFrame.this.frame.setVisible(false);
+            GameAppFrame.this.frame.setVisible(false);
                 try {
                     GameAppFrame ff=new GameAppFrame(Pokus.NewPokus(4,7));
                 } catch (IOException ex) {
@@ -81,9 +108,19 @@ public class GameAppFrame {
             
             }
             
+        });*/
+         submenu.addSeparator();
+       menuItem = new JMenuItem("2 hraci");
+         menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.print("2hraci");
+                
+             
+            }
+            
         });
-        menu.add(menuItem);
-        
+         submenu.add(menuItem);
         menu.addSeparator();
         menuItem = new JMenuItem("Exit");
        
@@ -97,6 +134,7 @@ public class GameAppFrame {
             
         });
         menu.add(menuItem);
+         menu.add(submenu);
         menu.addSeparator();
         menuItem = new JMenuItem("Save Game");
        

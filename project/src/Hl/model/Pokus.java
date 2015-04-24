@@ -55,25 +55,25 @@ public CardPack pack;
         switch (pocethrac){
             case 1: 
                 this.pocethrac=1;
-                figura.add(new MazeFigur(1,1,maze));
+                figura.add(new MazeFigur(1,1,maze,0));
             break;
             case 2:
                 this.pocethrac=2;
-                figura.add(new MazeFigur(1,1,maze));
-                figura.add(new MazeFigur(1,maze.rozmer,maze));
+                figura.add(new MazeFigur(1,1,maze,0));
+                figura.add(new MazeFigur(1,maze.rozmer,maze,1));
             break;
             case 3:
                 this.pocethrac=3;
-                figura.add(new MazeFigur(1,1,maze));
-                figura.add(new MazeFigur(1,maze.rozmer,maze));
-                figura.add(new MazeFigur(maze.rozmer,1,maze));
+                figura.add(new MazeFigur(1,1,maze,0));
+                figura.add(new MazeFigur(1,maze.rozmer,maze,1));
+                figura.add(new MazeFigur(maze.rozmer,1,maze,2));
             break;
             case 4:
                   this.pocethrac=4;
-                figura.add(new MazeFigur(1,1,maze));
-                figura.add(new MazeFigur(1,maze.rozmer,maze));
-                figura.add(new MazeFigur(maze.rozmer,1,maze));
-                figura.add(new MazeFigur(maze.rozmer,maze.rozmer,maze));
+                figura.add(new MazeFigur(1,1,maze,0));
+                figura.add(new MazeFigur(1,maze.rozmer,maze,1));
+                figura.add(new MazeFigur(maze.rozmer,1,maze,2));
+                figura.add(new MazeFigur(maze.rozmer,maze.rozmer,maze,3));
         pocethrac=4;
         }
         pack=new CardPack(24,24);

@@ -56,9 +56,9 @@ public class GCard extends JLayeredPane implements Serializable{
       this.setLayout(null);
       if (card.poklad!=null){
          
-        this.Gtreasure.setText(""+card.poklad.code);
+        this.Gtreasure.setText(""+card.poklad.Gcode);
         this.Gtreasure.setSize(60, 60);
-       this.Gtreasure.setIcon(GCard.setTreasureImage(card.poklad.code));
+       this.Gtreasure.setIcon(GCard.setTreasureImage(card.poklad.Gcode));
                 
       }
   this.add(Gtreasure,2,0);
@@ -72,45 +72,16 @@ public class GCard extends JLayeredPane implements Serializable{
  
       
     }
-    public static  ImageIcon setTreasureImage(int code){
-        ImageIcon icon=new ImageIcon("");
-        switch(code){
-               case 1:
-
-                  icon=new ImageIcon("1.png");    
-               break;
-               case 2:
-
-                  icon=new ImageIcon("2.png");    
-               break;
-               case 3:
-
-                  icon=new ImageIcon("3.png");    
-               break;
-               case 4:
-
-                  icon=new ImageIcon("4.png");    
-               break;
-               case 5:
-
-                  icon=new ImageIcon("5.png");    
-               break;
-               case 6:
-
-                  icon=new ImageIcon("6.png");    
-               break;
-               case 7:
-
-                  icon=new ImageIcon("7.png");    
-               break;
-           }
+    public static  ImageIcon setTreasureImage(int Gcode){
+        ImageIcon icon=new ImageIcon(""+Gcode+".png");
+       
         return icon;
     }
    public  void setImage(MazeCard card){
        if (card.poklad!=null){
             this.Gtreasure.setSize(60, 60);
-            this.Gtreasure.setIcon(GCard.setTreasureImage(card.poklad.code));
-           this.Gtreasure.setText(""+card.poklad.code);
+            this.Gtreasure.setIcon(GCard.setTreasureImage(card.poklad.Gcode));
+  
            
          
         

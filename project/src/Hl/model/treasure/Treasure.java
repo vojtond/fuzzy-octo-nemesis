@@ -7,6 +7,9 @@ package Hl.model.treasure;
 
 import Hl.model.board.MazeFigur;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -15,6 +18,7 @@ import java.io.Serializable;
  */
 public class Treasure implements Serializable{
     final public int code;
+     public int Gcode;
     static Treasure[] poklady; 
    
     static int pocet=24;     
@@ -25,11 +29,18 @@ public class Treasure implements Serializable{
      * Vytvori poklady
      */
     public static void createSet(){
-               
-        poklady=new Treasure[pocet];       
+          List<Integer> randomTreasureImage=new ArrayList<>(); 
+        for (int i=1;i<49;i++){
+            randomTreasureImage.add(i);
+        }
+        poklady=new Treasure[pocet];   
+        Random random=new Random();
+        int index=0;
         for (int i=0;i<pocet;i++){   
-           poklady[i]=new Treasure(i);  
-      
+           poklady[i]=new Treasure(i);
+           index=random.nextInt(randomTreasureImage.size());
+           poklady[i].Gcode=randomTreasureImage.get(index);
+           randomTreasureImage.remove(index);
         }
     }
     /**
