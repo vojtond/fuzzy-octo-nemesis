@@ -79,9 +79,9 @@ public class GCard extends JLayeredPane implements Serializable{
     }
    public  void setImage(MazeCard card){
        if (card.poklad!=null){
-            this.Gtreasure.setSize(60, 60);
+           
             this.Gtreasure.setIcon(GCard.setTreasureImage(card.poklad.Gcode));
-  
+             this.Gtreasure.setSize(Gtreasure.getIcon().getIconHeight(), Gtreasure.getIcon().getIconHeight());
            
          
         

@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 /**
  *
@@ -31,21 +32,20 @@ import javax.swing.JLayeredPane;
  */
 public  class GPokus extends JLayeredPane {
     
-    private Gboard Gdeska;
+    public Gboard Gdeska;
     private  GFreeCard Gfree;
     private boolean isSetClick; 
     private boolean isFocus;
     private Point Freepoc;
-    private final int maxHeight=1500;
-    private final int maxWidth=1500;
-    private GMazeFigur Gfigur; 
-    private List<GMazeFigur> Gfigura=new ArrayList<>();
+    public JLabel tah;
+   // public GMazeFigur Gfigur; 
+    public List<GMazeFigur> Gfigura=new ArrayList<>();
     private Rectangle2D.Double[][] rect2;
     private Dimension dim; 
     private Pokus game; 
     private static GPokus GGPokus;
     public GTreasureCard Gtreasurecard;
-    
+    public GObtainedTreasure[] gobtainedtreasure;
     public static GPokus newGPokus(Pokus game){
          System.out.print("***"+game.getBoard().get(2, 2).getCard().CardCanGo);
          
@@ -60,8 +60,8 @@ public  class GPokus extends JLayeredPane {
        this.game=game;
         int height=game.getHeight();
         int width=game.getWidth();
-        rH=(double)maxHeight/height;
-        rW=(double)maxWidth/width;
+        rH=(double)game.getHeight()/height;
+        rW=(double)game.getHeight()/width;
         ratio=rH>1 ? 1:rH;
         ratio=rW>1 ? ratio : ( rW > rH ? rH : rW);
         gH=(int)(height*ratio);
@@ -74,25 +74,25 @@ public  class GPokus extends JLayeredPane {
         this.setOpaque(true);
         this.isSetClick=false;  
         this.setLayout(null);
-        this.setFocusable(true);
-        this.requestFocusInWindow();
+       
+      
         
         this.Gdeska=Gboard.newGboard(game);
         this.Gfree=GFreeCard.newGFreeCard(game);
-        this.Gfree.setOpaque(true);
+       // this.Gfree.setOpaque(true);
         this.add(Gdeska,1,0);
-        this.add(Gfree,2,0);
+        this.add(Gfree.Gfreecard,2,0);
         this.isFocus=false;
         this.Freepoc=new Point();  
-        this.Gdeska.setLocation(this.getHeight()/2-(this.Gdeska.getHeight()/2),this.getWidth()/2-(this.Gdeska.getWidth()/2));
-        this.Freepoc.setLocation(Gdeska.getX()-70, Gdeska.getY()-70);
+        this.Gdeska.setLocation(this.getHeight()/2-(this.Gdeska.getHeight()/2),0+60);
+        this.Freepoc.setLocation(game.CardSize, 0);
         this.Gfree.pozice=this.Freepoc;
         this.Gtreasurecard=new GTreasureCard(game);
         this.add(Gtreasurecard,1,0);
-        height=60;
-        width=60;
-        rH=(double)60/height;
-        rW=(double)60/width;
+        height=game.CardSize;
+        width=game.CardSize;
+        rH=(double)game.CardSize/height;
+        rW=(double)game.CardSize/width;
         ratio=rH>1 ? 1:rH;
         ratio=rW>1 ? ratio : ( rW > rH ? rH : rW);
         gH=(int)(height*ratio);
@@ -109,17 +109,43 @@ public  class GPokus extends JLayeredPane {
                rect2[i][j]=new Rectangle2D.Double();        
             }
         }
-  
-        this.addKeyListener(new figurKeyEvent());
+        gobtainedtreasure=new GObtainedTreasure[game.pocethrac];
+       // System.out
+        int posun=0;
+        for(int i=0;i<game.pocethrac;i++){
+            this.gobtainedtreasure[i]=new GObtainedTreasure(game,game.figura.get(i).name);
+            this.gobtainedtreasure[i].setLocation(posun, 60);
+            System.out.print( this.gobtainedtreasure[i].getLocation());
+              this.add(this.gobtainedtreasure[i],0,0);
+            /* switch(i){
+                 case 0:
+                     posun+=60;
+                 break;
+                      case 1:
+                     posun=game.getWidth()-60;
+                 break;
+                          case 2:
+                     posun=game.getWidth()-120;
+                 break;
+             }*/
+              posun+=60;
+        }
+        
         MListener ml=new MListener();
         this.addMouseListener(ml);
         this.addMouseMotionListener(ml);
+        
 
         for (MazeFigur item : game.figura) {     
-            Gfigur=new GMazeFigur(game, item);
+          GMazeFigur  Gfigur=new GMazeFigur(game, item);
             this.add(Gfigur,3,0);
             Gfigura.add(Gfigur);
           } 
+          tah=new JLabel(game.figur.name);
+        tah.setLocation(game.getHeight()/2, 10);
+        tah.setSize(100, 70);
+        tah.setIcon(Gfigura.get(0).getIcon());
+        this.add(tah,5,0);
         repaint();
    }
   
@@ -149,9 +175,10 @@ public  class GPokus extends JLayeredPane {
         @Override
         public void mousePressed(MouseEvent e){
             
-           if (Gfree.contains(e.getX()-Gfree.getX(), e.getY()-Gfree.getY())&& game.getFaze()==0){
+           if (Gfree.Gfreecard.contains(e.getX()-Gfree.Gfreecard.getX(), e.getY()-Gfree.Gfreecard.getY())&& game.getFaze()==0){
                if (e.getButton()==MouseEvent.BUTTON3){
                    Gdeska.getBoard().getFreeCard().turnRight();
+                   
                    repaint();
                    isFocus=false;
                }else
@@ -165,7 +192,7 @@ public  class GPokus extends JLayeredPane {
                     
                     Point p;
                     Gfree.pozice=e.getPoint();
-                    Gfree.pozice.setLocation(e.getX()+30, e.getY()+30);
+                    Gfree.pozice.setLocation(e.getX()+game.CardSize/2, e.getY()+game.CardSize/2);
                     p=e.getPoint();
                     if (game.getFaze()==0){
                     for (int i=1;i<=Gdeska.getBoard().rozmer;i=i+Gdeska.getBoard().rozmer-1){
@@ -178,7 +205,7 @@ public  class GPokus extends JLayeredPane {
                                     p.setLocation(rect2[Gdeska.getBoard().rozmer-1][j-1].getX(), rect2[Gdeska.getBoard().rozmer-1][j-1].getY()+60);
                                 }else
                                 if(i==Gdeska.getBoard().rozmer){
-                                    p.setLocation(rect2[0][j-1].getX(), rect2[0][j-1].getY()-60);
+                                    p.setLocation(rect2[0][j-1].getX(), rect2[0][j-1].getY()-game.CardSize);
                                 }
                                
                             }
@@ -186,18 +213,18 @@ public  class GPokus extends JLayeredPane {
                                 game.setFaze(1);
                                 Gdeska.getBoard().shift(Gdeska.getBoard().get(j, i));
                                 if(i==1){
-                                    p.setLocation(rect2[j-1][Gdeska.getBoard().rozmer-1].getX()+60, rect2[j-1][Gdeska.getBoard().rozmer-1].getY());
+                                    p.setLocation(rect2[j-1][Gdeska.getBoard().rozmer-1].getX()+game.CardSize, rect2[j-1][Gdeska.getBoard().rozmer-1].getY());
                                 }else
                                 if(i==Gdeska.getBoard().rozmer){
-                                        p.setLocation(rect2[j-1][0].getX()-60, rect2[j-1][0].getY());
+                                        p.setLocation(rect2[j-1][0].getX()-game.CardSize, rect2[j-1][0].getY());
                                 }
                                 
                             }
                           
                         }
                     }
-                    Gfree.pozice=p;
-                    }else {Gfree.pozice=Freepoc;repaint();}
+                    Gfree.setLocation(p);
+                    }else {Gfree.setLocation(Freepoc);repaint();}
                     
                 }
             }
@@ -205,9 +232,9 @@ public  class GPokus extends JLayeredPane {
          @Override
         public void mouseDragged(MouseEvent e){
             if(isFocus && game.getFaze()==0){ 
+                Gfree.setLocation(e.getPoint());
+                 
                
-                  Gfree.pozice=e.getPoint();
-                  repaint();
                
             }
           
@@ -215,80 +242,5 @@ public  class GPokus extends JLayeredPane {
     
    
     }
-     private class figurKeyEvent extends KeyAdapter{
-        @Override
-        public void keyPressed(KeyEvent e){
-             
-            switch (e.getKeyCode()){
-                case 10:                   
-                    game.changePlayer();
-                    MazeCard carda=game.getBoard().get(game.figur.x,game.figur.y).getCard();
-                    if (game.figur.treasure.equals(carda.poklad)){
-                            carda.putTreasure(null);
-                            game.figur.treasure=null;
-                            GPokus.this.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(carda);
-                             game.changePlayer();
-                       }
-                    
-                break;
-                case 37:
-                     
-                    if (game.figur.move(MazeCard.CANGO.LEFT)){
-                       game.setFaze(2);
-                       
-                       MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
-                       if (game.figur.treasure.equals(card.poklad)){
-                            card.putTreasure(null);
-                            game.figur.treasure=null;
-                            GPokus.this.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
-                             game.changePlayer();
-                       }
-                    }
-                  
-                break;
-                case 38:
-                     
-                    if (game.figur.move(MazeCard.CANGO.UP)){
-                        game.setFaze(2);
-                         MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
-                        if (game.figur.treasure.equals(card.poklad)){
-                            game.getBoard().get(game.figur.x,game.figur.y).getCard().putTreasure(null);
-                            game.figur.treasure=null;
-                           GPokus.this.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
-                            game.changePlayer();
-                        }
-                        }
-                
-                break;
-                case 39:
-                    
-                    if (game.figur.move(MazeCard.CANGO.RIGHT)){
-                        game.setFaze(2);
-                         MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
-                        if (game.figur.treasure.equals(card.poklad)){
-                            game.getBoard().get(game.figur.x,game.figur.y).getCard().putTreasure(null);
-                            game.figur.treasure=null;
-                            GPokus.this.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
-                             game.changePlayer();
-                        }
-                    }
-                  
-                break;
-                case 40:
-                    
-                    if (game.figur.move(MazeCard.CANGO.DOWN)){
-                        game.setFaze(2);
-                         MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
-                        if (game.figur.treasure.equals(card.poklad)){
-                            game.getBoard().get(game.figur.x,game.figur.y).getCard().putTreasure(null);  
-                            game.figur.treasure=null;
-                            GPokus.this.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
-                             game.changePlayer();
-                        }
-                    }
-               
-                break;
-            }
-        }
-    }
+    
 }

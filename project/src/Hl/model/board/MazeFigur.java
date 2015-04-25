@@ -10,6 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import javax.swing.JPanel;
 
@@ -23,12 +25,15 @@ public class MazeFigur  extends Observable implements Serializable{
     private MazeBoard game;
     public Treasure treasure;
     public int player;
-    public MazeFigur(int x,int y,MazeBoard maze,int player){
+    public String name;
+    public List<Treasure> obtainedTreasure=new ArrayList<>();
+    public MazeFigur(int x,int y,MazeBoard maze,int player,String name){
        this.x=x;
        this.y=y;
        this.game=maze;
        this.treasure=null;
        this.player=player;
+       this.name=name;
     }
   public void changeShift(int x,int y){
       this.x=this.x+x;

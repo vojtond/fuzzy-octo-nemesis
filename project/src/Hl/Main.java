@@ -50,9 +50,9 @@ public class Main  {
 }
     public Main() throws IOException, FileNotFoundException, ClassNotFoundException{
         
-            game =Pokus.NewPokus(4,7);
+         //   game =Pokus.NewPokus(4,7);
          
-            AppFrame=new GameAppFrame(game);
+            AppFrame=GameAppFrame.newGameAppFrame();
           
          
        

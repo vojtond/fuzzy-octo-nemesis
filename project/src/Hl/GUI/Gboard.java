@@ -37,7 +37,7 @@ public  final class Gboard extends JPanel{
         label=new GCard[game.getBoard().rozmer][game.getBoard().rozmer];
         GridLayout lay =new GridLayout(game.getBoard().rozmer,game.getBoard().rozmer);
         this.setLayout(lay);
-        dimB=new Dimension (game.getBoard().rozmer*60,60*game.getBoard().rozmer);
+        dimB=new Dimension (game.getBoard().rozmer*game.CardSize,game.CardSize*game.getBoard().rozmer);
         this.setPreferredSize(dimB);
         this.setSize(dimB);
         this.setBackground(Color.LIGHT_GRAY);
