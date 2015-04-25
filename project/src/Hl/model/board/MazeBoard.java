@@ -116,9 +116,13 @@ public class MazeBoard extends Observable implements Serializable{
       
   }
   private static  void rotate(MazeCard m,int i){
+      
+      System.out.print("pred rotaci "+m.CardCanGo+"\n");
       for (int j=0;j<i;j++){
           m.turnRight();
+         
       }
+       System.out.print("po  "+i+m.CardCanGo+"\n");
   }
   public MazeCard getFreeCard(){
           return volna;    

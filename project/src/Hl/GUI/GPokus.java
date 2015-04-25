@@ -101,7 +101,7 @@ public  class GPokus extends JLayeredPane {
         this.Gtreasurecard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.Gtreasurecard.setPreferredSize(dim);
         this.Gtreasurecard.setSize(dim);
-        this.Gtreasurecard.setBackground(Color.BLACK);
+        this.Gtreasurecard.setBackground(Color.WHITE);
         this.Gtreasurecard.setLocation(0,0);
         rect2=new Rectangle2D.Double[game.getBoard().rozmer][game.getBoard().rozmer];
         for(int i=0;i<game.getBoard().rozmer;i++){
@@ -113,7 +113,7 @@ public  class GPokus extends JLayeredPane {
        // System.out
         int posun=0;
         for(int i=0;i<game.pocethrac;i++){
-            this.gobtainedtreasure[i]=new GObtainedTreasure(game,game.figura.get(i).name);
+            this.gobtainedtreasure[i]=new GObtainedTreasure(game,game.figura.get(i).name,i);
             this.gobtainedtreasure[i].setLocation(posun, 60);
             System.out.print( this.gobtainedtreasure[i].getLocation());
               this.add(this.gobtainedtreasure[i],0,0);
@@ -141,11 +141,9 @@ public  class GPokus extends JLayeredPane {
             this.add(Gfigur,3,0);
             Gfigura.add(Gfigur);
           } 
-          tah=new JLabel(game.figur.name);
-        tah.setLocation(game.getHeight()/2, 10);
-        tah.setSize(100, 70);
-        tah.setIcon(Gfigura.get(0).getIcon());
-        this.add(tah,5,0);
+          tah=new GHracNaTahu(game);
+        
+          this.add(tah,5,0);
         repaint();
    }
   
@@ -159,7 +157,7 @@ public  class GPokus extends JLayeredPane {
         }
        
         for (GMazeFigur item : Gfigura) {
-            item.setLocation(Gdeska.getField(item.figur.x-1, item.figur.y-1).getX()+Gdeska.getX()+10,Gdeska.getField(item.figur.x-1, item.figur.y-1).getY()+Gdeska.getY()+10);
+            item.setLocation(Gdeska.getField(item.figur.x-1, item.figur.y-1).getX()+Gdeska.getX(),Gdeska.getField(item.figur.x-1, item.figur.y-1).getY()+Gdeska.getY());
         }           
     }
 
@@ -239,6 +237,7 @@ public  class GPokus extends JLayeredPane {
             }
           
         }
+        
     
    
     }

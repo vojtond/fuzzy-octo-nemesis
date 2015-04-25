@@ -149,6 +149,7 @@ public class GameAppFrame {
             public void actionPerformed(ActionEvent e) {
                  GameAppFrame.this.game=null;
                  GameAppFrame.this.gp=null;
+                 System.gc();
                  System.out.print("blop\n");
                  
                  
@@ -173,6 +174,7 @@ public class GameAppFrame {
             public void actionPerformed(ActionEvent e) {
                  GameAppFrame.this.game=null;
                  GameAppFrame.this.gp=null;
+                 System.gc();
               //   System.gc();
                   int i = Integer.parseInt(group.getSelection().getActionCommand());
               JFieldTextDemo k=new JFieldTextDemo(3,i);
@@ -190,6 +192,7 @@ public class GameAppFrame {
             public void actionPerformed(ActionEvent e) {
                  GameAppFrame.this.game=null;
                  GameAppFrame.this.gp=null;
+                 System.gc();
                 // System.gc();
               int i = Integer.parseInt(group.getSelection().getActionCommand());
               JFieldTextDemo k=new JFieldTextDemo(4,i);
@@ -274,8 +277,7 @@ public class GameAppFrame {
                              game.changePlayer();
                              frame.repaint();
                        }
-                    gp.tah.setText(game.figur.name);
-                    gp.tah.setIcon(gp.Gfigura.get(game.HracNaTahu).getIcon());
+             
                     
                 break;
                 case 37:
@@ -286,15 +288,13 @@ public class GameAppFrame {
                        
                        MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
                        if (game.figur.treasure.equals(card.poklad)){
-                            game.figur.obtainedTreasure.add(game.figur.treasure);
-                           gp.gobtainedtreasure[game.HracNaTahu].addTresure(game.figur.treasure);
+                             game.figur.AddObtainedTreasure(game.figur.treasure);                
                             card.putTreasure(null);
                             game.figur.treasure=null;
                             
                             GameAppFrame.this.gp.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
                              game.changePlayer();
-                             gp.tah.setText(game.figur.name);
-                    gp.tah.setIcon(gp.Gfigura.get(game.HracNaTahu).getIcon());
+                 
                              frame.repaint();
                        }
                     }
@@ -306,14 +306,13 @@ public class GameAppFrame {
                         game.setFaze(2);
                          MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
                         if (game.figur.treasure.equals(card.poklad)){
-                             game.figur.obtainedTreasure.add(game.figur.treasure);
-                           gp.gobtainedtreasure[game.HracNaTahu].addTresure(game.figur.treasure);
+                             game.figur.AddObtainedTreasure(game.figur.treasure);
+                          // gp.gobtainedtreasure[game.HracNaTahu].addTresure(game.figur.treasure);
                             game.getBoard().get(game.figur.x,game.figur.y).getCard().putTreasure(null);
                             game.figur.treasure=null;
                           GameAppFrame.this.gp.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
                             game.changePlayer();
-                             gp.tah.setText(game.figur.name);
-                    gp.tah.setIcon(gp.Gfigura.get(game.HracNaTahu).getIcon());
+                      
                             frame.repaint();
                         }
                         }
@@ -325,16 +324,15 @@ public class GameAppFrame {
                         game.setFaze(2);
                          MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
                         if (game.figur.treasure.equals(card.poklad)){
-                             game.figur.obtainedTreasure.add(game.figur.treasure);
+                             game.figur.AddObtainedTreasure(game.figur.treasure);
                              System.out.print(game.figur.obtainedTreasure);
-                            gp.gobtainedtreasure[game.HracNaTahu].addTresure(game.figur.treasure);
+                            //gp.gobtainedtreasure[game.HracNaTahu].addTresure(game.figur.treasure);
                             game.getBoard().get(game.figur.x,game.figur.y).getCard().putTreasure(null);
                             game.figur.treasure=null;
                             GameAppFrame.this.gp.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
                              game.changePlayer();
                              
-                              gp.tah.setText(game.figur.name);
-                    gp.tah.setIcon(gp.Gfigura.get(game.HracNaTahu).getIcon());
+                
                     frame.repaint();
                         }
                     }
@@ -346,14 +344,14 @@ public class GameAppFrame {
                         game.setFaze(2);
                          MazeCard card=game.getBoard().get(game.figur.x,game.figur.y).getCard();
                         if (game.figur.treasure.equals(card.poklad)){
-                             game.figur.obtainedTreasure.add(game.figur.treasure);
-                            gp.gobtainedtreasure[game.HracNaTahu].addTresure(game.figur.treasure);
+                             game.figur.AddObtainedTreasure(game.figur.treasure);
+                         
                             game.getBoard().get(game.figur.x,game.figur.y).getCard().putTreasure(null);  
                             game.figur.treasure=null;
                             GameAppFrame.this.gp.Gdeska.getField(game.figur.x-1,game.figur.y-1).setImage(card);
                              game.changePlayer();
-                              gp.tah.setText(game.figur.name);
-                    gp.tah.setIcon(gp.Gfigura.get(game.HracNaTahu).getIcon());
+                     //         gp.tah.setText(game.figur.name);
+                    //gp.tah.setIcon(gp.Gfigura.get(game.HracNaTahu).getIcon());
                              frame.repaint();
                         }
                     }

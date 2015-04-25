@@ -42,7 +42,7 @@ public CardPack pack;
       
      public int pocethrac;
      public int HracNaTahu;
-      public List<MazeFigur> figura=new ArrayList<>();
+     public List<MazeFigur> figura=new ArrayList<>();
       public MazeFigur figur;
       public static Pokus PPokus;
       public static Pokus NewPokus(int pocethrac,int rozmer,List<String> figuraname){
@@ -59,40 +59,29 @@ public CardPack pack;
         this.HracNaTahu=-1;
           
         System.out.print("pred\n");
-        switch (pocethrac){
-            case 1: 
-                this.pocethrac=1;
+        if (pocethrac>=1)
+                
                 figura.add(new MazeFigur(1,1,maze,0,figuraname.get(0)));
-            break;
-            case 2:
-                this.pocethrac=2;
-                figura.add(new MazeFigur(1,1,maze,0,figuraname.get(0)));
-                System.out.print(""+figuraname.get(0)+"\n");
+        if (pocethrac>=2)   
+               
                 figura.add(new MazeFigur(1,maze.rozmer,maze,1,figuraname.get(1)));
-                System.out.print(""+figuraname.get(1)+"\n");
-            break;
-            case 3:
-                this.pocethrac=3;
-                figura.add(new MazeFigur(1,1,maze,0,figuraname.get(0)));
-                figura.add(new MazeFigur(1,maze.rozmer,maze,1,figuraname.get(1)));
+               
+        if (pocethrac>=3)
+              
                 figura.add(new MazeFigur(maze.rozmer,1,maze,2,figuraname.get(2)));
                 
-            break;
-            case 4:
-                  this.pocethrac=4;
-                figura.add(new MazeFigur(1,1,maze,0,figuraname.get(0)));
-                figura.add(new MazeFigur(1,maze.rozmer,maze,1,figuraname.get(1)));
-                figura.add(new MazeFigur(maze.rozmer,1,maze,2,figuraname.get(2)));
+          if (pocethrac>=4)
+            
                 figura.add(new MazeFigur(maze.rozmer,maze.rozmer,maze,3,figuraname.get(3)));
            
-            break;
+           this.pocethrac=pocethrac;
      
-        }
+        
     
                 height=this.CardSize*maze.rozmer*2;
                 width=this.CardSize*maze.rozmer*2;
           
-        System.out.print("ya\n");
+      
         pack=new CardPack(24,24);
         pack.shuffle();
         changePlayer();
@@ -111,7 +100,7 @@ public CardPack pack;
             boolean obsazeno=true;
             
            while (obsazeno){
-               System.out.print(maze.rozmer+" "+x+y+"**\n");
+              
                 x=random.nextInt(maze.rozmer)+1;
                 y=random.nextInt(maze.rozmer)+1;
                
@@ -129,7 +118,7 @@ public CardPack pack;
             HracNaTahu++;
         }else HracNaTahu=0;
         faze=0;
-        this.figur=figura.get(this.HracNaTahu);
+         figur=figura.get(this.HracNaTahu);
         
           if (figur.treasure==null){
                         figur.treasure=pack.popCard().TreasureOnCard;
@@ -137,7 +126,7 @@ public CardPack pack;
           }
           System.out.print("tah"+HracNaTahu);
             setChanged();
-            notifyObservers(this.figur.treasure);
+            notifyObservers(figur);
             System.out.print("hledam"+figur.treasure.code+"\n");
             
     }

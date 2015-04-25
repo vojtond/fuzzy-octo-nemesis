@@ -27,6 +27,11 @@ public class MazeFigur  extends Observable implements Serializable{
     public int player;
     public String name;
     public List<Treasure> obtainedTreasure=new ArrayList<>();
+    public void AddObtainedTreasure(Treasure treasure){
+        obtainedTreasure.add(treasure);
+         setChanged();
+       notifyObservers(treasure);
+    }
     public MazeFigur(int x,int y,MazeBoard maze,int player,String name){
        this.x=x;
        this.y=y;
@@ -49,7 +54,7 @@ public class MazeFigur  extends Observable implements Serializable{
           }else this.y=1;
       }
          setChanged();
-       notifyObservers();
+       notifyObservers(null);
       System.out.print("\n**"+this.x+" "+this.y+"**\n");
       
   }
@@ -57,28 +62,32 @@ public class MazeFigur  extends Observable implements Serializable{
      
       boolean move;
       move= false;
+      System.out.print("stojem van go"+" "+game.get(x, y).getCard().CardCanGo+"\n");
      if (game.get(x, y).getCard().canGo(can)){
        
          if (can==MazeCard.CANGO.UP){
-             
+             System.out.print("jduvan go"+" "+game.get(x-1, y).getCard().CardCanGo+"\n");
              if ( x-1>0 && game.get(x-1, y).getCard().canGo(MazeCard.CANGO.DOWN)){
                 x+=-1;
                 move= true;
              }
          }else
          if (can==MazeCard.CANGO.DOWN){
+               System.out.print("jduvan go"+" "+game.get(x+1, y).getCard().CardCanGo+"\n");
                if ( x+1<=game.rozmer && game.get(x+1, y).getCard().canGo(MazeCard.CANGO.UP)){
              x+=1;
              move= true;
                }
          }else
          if (can==MazeCard.CANGO.LEFT){
+               System.out.print("jduvan go"+" "+game.get(x, y-1).getCard().CardCanGo+"\n");
                if (y-1>0 && game.get(x, y-1).getCard().canGo(MazeCard.CANGO.RIGHT)){
                 y+=-1;
                 move= true;
                }
          }else
          if (can==MazeCard.CANGO.RIGHT){
+               System.out.print("jduvan go"+" "+game.get(x, y+1).getCard().CardCanGo+"\n");
                if (y+1<=game.rozmer &&game.get(x, y+1).getCard().canGo(MazeCard.CANGO.LEFT)){
              
                 y+=1;
@@ -87,8 +96,9 @@ public class MazeFigur  extends Observable implements Serializable{
          }
      } 
         setChanged();
-       notifyObservers();
-      System.out.print("\n**"+this.x+" "+this.y+"**\n");
+        
+       notifyObservers(null);
+      
      return move;
   }
    

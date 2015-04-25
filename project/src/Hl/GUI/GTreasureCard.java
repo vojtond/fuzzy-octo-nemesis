@@ -7,6 +7,7 @@ package Hl.GUI;
 
 import Hl.model.Pokus;
 import Hl.model.board.MazeField;
+import Hl.model.board.MazeFigur;
 import Hl.model.treasure.Treasure;
 import java.awt.BorderLayout;
 import java.util.Observable;
@@ -35,13 +36,12 @@ public class GTreasureCard extends JPanel{
        
        @Override 
        public void update(Observable o,Object arg){
-           Treasure argu=(Treasure)arg;
-           GTreasureCard.this.GTreasure.setText(""+argu.code);
-              GTreasureCard.this.GTreasure.setIcon(GCard.setTreasureImage(argu.Gcode));
-           
+         
           
-
-           //repaint();
+           MazeFigur argu=(MazeFigur)arg;
+           //GTreasureCard.this.GTreasure.setText(""+argu.treasure.code);
+              GTreasureCard.this.GTreasure.setIcon(GCard.setTreasureImage(argu.treasure.Gcode));
+       
        }
    }
             
